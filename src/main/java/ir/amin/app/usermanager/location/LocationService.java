@@ -94,7 +94,7 @@ public class LocationService {
     }
 
     public Country updateCountry(Integer countryID, Country country) {
-        if (!countryRepository.existsById(countryID)) {
+        if (!isCountryExist(countryID)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not find country with id = " + countryID);
         }
         validateCountryInfo(country);
@@ -107,7 +107,7 @@ public class LocationService {
     }
 
     public Province updateProvince(Long provinceID, Province province) {
-        if (!provinceRepository.existsById(provinceID)) {
+        if (!isProvinceExist(provinceID)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not find province with id = " + provinceID);
         }
         validateProvinceInfo(province);
@@ -120,7 +120,7 @@ public class LocationService {
     }
 
     public City updateCity(Long cityID, City city) {
-        if (!cityRepository.existsById(cityID)) {
+        if (!isCityExist(cityID)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not find city with id = " + cityID);
         }
         validateCityInfo(city);
@@ -133,7 +133,7 @@ public class LocationService {
     }
 
     public ResponseEntity<?> deleteCountry(Integer countryID) {
-        if (!countryRepository.existsById(countryID)) {
+        if (!isCountryExist(countryID)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not find country with id = " + countryID);
         }
         try {
@@ -145,7 +145,7 @@ public class LocationService {
     }
 
     public ResponseEntity<?> deleteProvince(Long cityID) {
-        if (!provinceRepository.existsById(cityID)) {
+        if (!isProvinceExist(cityID)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not find province with id = " + cityID);
         }
         try {
@@ -157,7 +157,7 @@ public class LocationService {
     }
 
     public ResponseEntity<?> deleteCity(Long cityID) {
-        if (!cityRepository.existsById(cityID)) {
+        if (!isCityExist(cityID)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not find city with id = " + cityID);
         }
         try {
@@ -166,6 +166,18 @@ public class LocationService {
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not delete city.");
         }
+    }
+
+    public boolean isCountryExist(Integer countryID){
+        return countryRepository.existsById(countryID);
+    }
+
+    public boolean isProvinceExist(Long provinceID){
+        return provinceRepository.existsById(provinceID);
+    }
+
+    public boolean isCityExist(Long cityID){
+        return cityRepository.existsById(cityID);
     }
 
     private void validateCountryInfo(Country country) {
