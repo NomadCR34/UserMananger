@@ -102,7 +102,7 @@ public class LocationService {
             country.setId(countryID);
             return countryRepository.save(country);
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not save country.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not update country.");
         }
     }
 
@@ -115,7 +115,7 @@ public class LocationService {
             province.setId(provinceID);
             return provinceRepository.save(province);
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not save province.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not update province.");
         }
     }
 
@@ -128,7 +128,7 @@ public class LocationService {
             city.setId(cityID);
             return cityRepository.save(city);
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not save city.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not update city.");
         }
     }
 
