@@ -27,7 +27,6 @@ public class Country {
         this.id = id;
     }
 
-    @Id
     public Integer getId() {
         return id;
     }

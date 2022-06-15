@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("/gender")
 public class GenderController {
 
-    private GenderService genderService;
+    private final GenderService genderService;
 
     @Autowired
     public GenderController(GenderService genderService) {

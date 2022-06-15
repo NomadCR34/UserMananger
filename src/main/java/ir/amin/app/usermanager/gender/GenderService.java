@@ -65,7 +65,7 @@ public class GenderService {
             return new ResponseEntity<>( HttpStatus.OK);
         }catch (Exception e){
             System.out.println(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Can not delete gender");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not delete gender");
         }
     }
 

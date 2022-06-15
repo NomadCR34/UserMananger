@@ -10,7 +10,7 @@ import java.util.List;
 @RequestMapping("/admin/gender")
 public class GenderAdminController {
 
-    private GenderService genderService;
+    private final GenderService genderService;
 
     @Autowired
     public GenderAdminController(GenderService genderService) {
