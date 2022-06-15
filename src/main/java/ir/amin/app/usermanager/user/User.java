@@ -33,11 +33,17 @@ public class User {
     @Column(nullable = false)
     private String nationalID;
 
-    private Short countryID;
+    private Integer countryID;
 
-    private Short provinceID;
+    private Long provinceID;
 
-    private Short cityID;
+    private Long cityID;
+
+    private Long birthPlaceCity;
+
+    private Short degree;
+
+    private Short language;
 
     @Column(length = 50, nullable = false)
     private String email;
@@ -49,6 +55,46 @@ public class User {
     private String address;
 
     public User() {
+    }
+
+    public User(
+            String firstName,
+            String middleName,
+            String lastName,
+            Long birthDate,
+            Long registerDate,
+            Long modifiedDate,
+            Long lastLoginDate,
+            Short genderID,
+            String nationalID,
+            Integer countryID,
+            Long provinceID,
+            Long cityID,
+            Long birthPlaceCity,
+            Short degree,
+            Short language,
+            String email,
+            String phone,
+            String address
+    ) {
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.registerDate = registerDate;
+        this.modifiedDate = modifiedDate;
+        this.lastLoginDate = lastLoginDate;
+        this.genderID = genderID;
+        this.nationalID = nationalID;
+        this.countryID = countryID;
+        this.provinceID = provinceID;
+        this.cityID = cityID;
+        this.birthPlaceCity = birthPlaceCity;
+        this.degree = degree;
+        this.language = language;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
     }
 
     public void setId(Long id) {
@@ -131,27 +177,27 @@ public class User {
         this.nationalID = nationalID;
     }
 
-    public Short getCountryID() {
+    public Integer getCountryID() {
         return countryID;
     }
 
-    public void setCountryID(Short countryID) {
+    public void setCountryID(Integer countryID) {
         this.countryID = countryID;
     }
 
-    public Short getProvinceID() {
+    public Long getProvinceID() {
         return provinceID;
     }
 
-    public void setProvinceID(Short provinceID) {
+    public void setProvinceID(Long provinceID) {
         this.provinceID = provinceID;
     }
 
-    public Short getCityID() {
+    public Long getCityID() {
         return cityID;
     }
 
-    public void setCityID(Short cityID) {
+    public void setCityID(Long cityID) {
         this.cityID = cityID;
     }
 
@@ -179,25 +225,27 @@ public class User {
         this.address = address;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", middleName='" + middleName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", birthDate=" + birthDate +
-                ", registerDate=" + registerDate +
-                ", modifiedDate=" + modifiedDate +
-                ", lastLoginDate=" + lastLoginDate +
-                ", genderID=" + genderID +
-                ", nationalID='" + nationalID + '\'' +
-                ", countryID=" + countryID +
-                ", provinceID=" + provinceID +
-                ", cityID=" + cityID +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                ", address='" + address + '\'' +
-                '}';
+    public Long getBirthPlaceCity() {
+        return birthPlaceCity;
+    }
+
+    public void setBirthPlaceCity(Long birthPlaceCity) {
+        this.birthPlaceCity = birthPlaceCity;
+    }
+
+    public Short getDegree() {
+        return degree;
+    }
+
+    public void setDegree(Short degree) {
+        this.degree = degree;
+    }
+
+    public Short getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(Short language) {
+        this.language = language;
     }
 }
