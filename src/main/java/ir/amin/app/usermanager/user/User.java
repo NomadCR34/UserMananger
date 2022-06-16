@@ -8,7 +8,8 @@ import javax.persistence.*;
 @Table(name = "tbl_user")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_DATA")
+    @SequenceGenerator(sequenceName = "user_seq", allocationSize = 1, name = "USER_DATA")
     private Long id;
 
     @Column(length = 30, nullable = false)
@@ -41,9 +42,9 @@ public class User {
 
     private Long birthPlaceCity;
 
-    private Short degree;
+    private Integer degree;
 
-    private Short language;
+    private Integer language;
 
     @Column(length = 50, nullable = false)
     private String email;
@@ -71,8 +72,8 @@ public class User {
             Long provinceID,
             Long cityID,
             Long birthPlaceCity,
-            Short degree,
-            Short language,
+            Integer degree,
+            Integer language,
             String email,
             String phone,
             String address
@@ -233,19 +234,19 @@ public class User {
         this.birthPlaceCity = birthPlaceCity;
     }
 
-    public Short getDegree() {
+    public Integer getDegree() {
         return degree;
     }
 
-    public void setDegree(Short degree) {
+    public void setDegree(Integer degree) {
         this.degree = degree;
     }
 
-    public Short getLanguage() {
+    public Integer getLanguage() {
         return language;
     }
 
-    public void setLanguage(Short language) {
+    public void setLanguage(Integer language) {
         this.language = language;
     }
 }

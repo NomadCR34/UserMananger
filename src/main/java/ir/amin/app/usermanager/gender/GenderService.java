@@ -69,4 +69,8 @@ public class GenderService {
         }
     }
 
+    public boolean isGenderExist(Short id){
+        return genderRepository.existsById(id);
+    }
+
 }

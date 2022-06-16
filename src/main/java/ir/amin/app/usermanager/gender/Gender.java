@@ -6,7 +6,8 @@ import javax.persistence.*;
 @Table(name = "tbl_gender")
 public class Gender {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GENDER_DATA")
+    @SequenceGenerator(sequenceName = "gender_seq", allocationSize = 1, name = "GENDER_DATA")
     private Short id;
     @Column(length = 15, nullable = false)
     private String name;

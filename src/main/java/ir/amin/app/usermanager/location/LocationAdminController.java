@@ -27,7 +27,7 @@ public class LocationAdminController {
         return locationService.getCountryByID(countryID);
     }
 
-    @GetMapping("/province/{country_id}")
+    @GetMapping("/province/list/{country_id}")
     public List<Province> getProvinceList(@PathVariable("country_id") Integer countryID){
         return locationService.getProvinceByCountryID(countryID);
     }
@@ -37,7 +37,7 @@ public class LocationAdminController {
         return locationService.getProvinceByID(provinceID);
     }
 
-    @GetMapping("/city/{province_id}")
+    @GetMapping("/city/list/{province_id}")
     public List<City> getCityList(@PathVariable("province_id") Long provinceID){
         return locationService.getCityByProvinceID(provinceID);
     }

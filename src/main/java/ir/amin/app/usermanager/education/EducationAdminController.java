@@ -28,12 +28,12 @@ public class EducationAdminController {
     }
 
     @PostMapping
-    public Education updateEducation(Education education) {
+    public Education createEducation(@RequestBody Education education) {
         return educationService.save(education);
     }
 
     @PutMapping("/{education_id}")
-    public Education updateEducation(@PathVariable("education_id") Integer educationID,Education education) {
+    public Education updateEducation(@PathVariable("education_id") Integer educationID,@RequestBody Education education) {
         return educationService.update(educationID,education);
     }
 

@@ -6,7 +6,8 @@ import javax.persistence.*;
 @Entity
 public class Province {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PROVINCE_DATA")
+    @SequenceGenerator(sequenceName = "province_seq", allocationSize = 1, name = "PROVINCE_DATA")
     private Long id;
 
     @Column(length = 40,nullable = false)

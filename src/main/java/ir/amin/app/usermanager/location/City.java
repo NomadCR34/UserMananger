@@ -6,7 +6,8 @@ import javax.persistence.*;
 @Entity
 public class City {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CITY_DATA")
+    @SequenceGenerator(sequenceName = "city_seq", allocationSize = 1, name = "CITY_DATA")
     private Long id;
 
     @Column(length = 40,nullable = false)
@@ -16,7 +17,7 @@ public class City {
 
     private Double lat;
 
-    private double lng;
+    private Double lng;
 
     public void setId(Long id) {
         this.id = id;
@@ -29,7 +30,7 @@ public class City {
     public City() {
     }
 
-    public City(String name, Long provinceID, Double lat, double lng) {
+    public City(String name, Long provinceID, Double lat, Double lng) {
         this.name = name;
         this.provinceID = provinceID;
         this.lat = lat;
@@ -60,7 +61,7 @@ public class City {
         this.lat = lat;
     }
 
-    public double getLng() {
+    public Double getLng() {
         return lng;
     }
 

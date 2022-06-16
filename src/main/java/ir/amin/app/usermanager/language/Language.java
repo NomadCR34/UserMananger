@@ -1,18 +1,17 @@
-package ir.amin.app.usermanager.education;
+package ir.amin.app.usermanager.language;
 
 import javax.persistence.*;
 
-@Entity
 @Table
-public class Education {
-
+@Entity
+public class Language {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "EDU_DATA")
-    @SequenceGenerator(sequenceName = "edu_seq", allocationSize = 1, name = "EDU_DATA")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LANG_DATA")
+    @SequenceGenerator(sequenceName = "lang_seq", allocationSize = 1, name = "LANG_DATA")
     private Integer id;
     private String name;
 
-    public Education() {
+    public Language() {
     }
 
     public void setId(Integer id) {
@@ -33,7 +32,7 @@ public class Education {
 
     @Override
     public String toString() {
-        return "Education{" +
+        return "Language{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
