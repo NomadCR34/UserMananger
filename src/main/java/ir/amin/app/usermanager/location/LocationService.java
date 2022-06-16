@@ -76,6 +76,9 @@ public class LocationService {
     }
 
     public Province saveProvince(Province province) {
+        if (!isCountryExist(province.getCountryID())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not find country with id = " + province.getCountryID());
+        }
         validateProvinceInfo(province);
         try {
             return provinceRepository.save(province);
@@ -85,6 +88,9 @@ public class LocationService {
     }
 
     public City saveCity(City city) {
+        if (!isProvinceExist(city.getProvinceID())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not find province with id = " + city.getProvinceID());
+        }
         validateCityInfo(city);
         try {
             return cityRepository.save(city);
@@ -94,9 +100,6 @@ public class LocationService {
     }
 
     public Country updateCountry(Integer countryID, Country country) {
-        if (!isCountryExist(countryID)) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not find country with id = " + countryID);
-        }
         validateCountryInfo(country);
         try {
             country.setId(countryID);
@@ -190,6 +193,9 @@ public class LocationService {
     }
 
     private void validateProvinceInfo(Province province) {
+        if (!isCountryExist(province.getCountryID())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not find country with id = " + province.getCountryID());
+        }
         if (province.getName() == null || province.getName().isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Name of province can not be empty");
         }
@@ -199,6 +205,9 @@ public class LocationService {
     }
 
     private void validateCityInfo(City city) {
+        if (!isProvinceExist(city.getProvinceID())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not find province with id = " + city.getProvinceID());
+        }
         if (city.getName() == null || city.getName().isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Name of city can not be empty");
         }
