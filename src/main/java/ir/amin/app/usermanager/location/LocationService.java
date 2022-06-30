@@ -3,6 +3,7 @@ package ir.amin.app.usermanager.location;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -33,7 +34,7 @@ public class LocationService {
                 .collect(Collectors.toList());
     }
 
-    public Country getCountryByID(Integer countryID) {
+    public Country getCountryByID(@NonNull Integer countryID) {
         return countryRepository.findById(countryID)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND,
@@ -42,11 +43,11 @@ public class LocationService {
 
     }
 
-    public List<Province> getProvinceByCountryID(Integer countryID) {
+    public List<Province> getProvinceByCountryID(@NonNull Integer countryID) {
         return provinceRepository.findProvincesByCountryID(countryID);
     }
 
-    public Province getProvinceByID(Long provinceID) {
+    public Province getProvinceByID(@NonNull Long provinceID) {
         return provinceRepository.findById(provinceID)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND,
@@ -66,7 +67,10 @@ public class LocationService {
                 );
     }
 
-    public Country saveCountry(Country country) {
+    public Country saveCountry(@NonNull Country country) {
+        if(country == null){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"PLease insert valid country info");
+        }
         validateCountryInfo(country);
         try {
             return countryRepository.save(country);
@@ -75,7 +79,11 @@ public class LocationService {
         }
     }
 
-    public Province saveProvince(Province province) {
+    public Province saveProvince(@NonNull Province province) {
+        if(province == null){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"PLease insert valid province info");
+        }
+
         if (!isCountryExist(province.getCountryID())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not find country with id = " + province.getCountryID());
         }
@@ -87,7 +95,10 @@ public class LocationService {
         }
     }
 
-    public City saveCity(City city) {
+    public City saveCity(@NonNull City city) {
+        if(city == null){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"PLease insert valid city info");
+        }
         if (!isProvinceExist(city.getProvinceID())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not find province with id = " + city.getProvinceID());
         }
@@ -99,7 +110,10 @@ public class LocationService {
         }
     }
 
-    public Country updateCountry(Integer countryID, Country country) {
+    public Country updateCountry(Integer countryID,@NonNull Country country) {
+        if(country == null){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"PLease insert valid country info");
+        }
         validateCountryInfo(country);
         try {
             country.setId(countryID);
@@ -109,7 +123,10 @@ public class LocationService {
         }
     }
 
-    public Province updateProvince(Long provinceID, Province province) {
+    public Province updateProvince(Long provinceID,@NonNull Province province) {
+        if(province == null){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"PLease insert valid province info");
+        }
         if (!isProvinceExist(provinceID)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not find province with id = " + provinceID);
         }
@@ -122,7 +139,10 @@ public class LocationService {
         }
     }
 
-    public City updateCity(Long cityID, City city) {
+    public City updateCity(Long cityID,@NonNull City city) {
+        if(city == null){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"PLease insert valid city info");
+        }
         if (!isCityExist(cityID)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not find city with id = " + cityID);
         }
@@ -147,7 +167,7 @@ public class LocationService {
         }
     }
 
-    public ResponseEntity<?> deleteProvince(Long cityID) {
+    public ResponseEntity<?> deleteProvince(@NonNull Long cityID) {
         if (!isProvinceExist(cityID)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not find province with id = " + cityID);
         }
@@ -159,7 +179,7 @@ public class LocationService {
         }
     }
 
-    public ResponseEntity<?> deleteCity(Long cityID) {
+    public ResponseEntity<?> deleteCity(@NonNull Long cityID) {
         if (!isCityExist(cityID)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not find city with id = " + cityID);
         }
@@ -171,11 +191,11 @@ public class LocationService {
         }
     }
 
-    public boolean isCountryExist(Integer countryID){
+    public boolean isCountryExist(@NonNull Integer countryID){
         return countryRepository.existsById(countryID);
     }
 
-    public boolean isProvinceExist(Long provinceID){
+    public boolean isProvinceExist(@NonNull Long provinceID){
         return provinceRepository.existsById(provinceID);
     }
 
