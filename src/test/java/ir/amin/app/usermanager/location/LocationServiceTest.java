@@ -112,6 +112,11 @@ class LocationServiceTest {
 
     @Test
     void saveProvince() {
+        Province province = new Province("Test",1);
+        given(countryRepository.existsById(1)).willReturn(true);
+        given(provinceRepository.save(province)).willReturn(province);
+        Province savedProvince = locationService.saveProvince(province);
+        assertThat(province).isEqualTo(savedProvince);
     }
 
     @Test
@@ -146,10 +151,33 @@ class LocationServiceTest {
 
     @Test
     void updateCountry() {
+        Country country = new Country("Test","98");
+        country.setId(1);
+        given(countryRepository.existsById(1)).willReturn(true);
+        locationService.updateCountry(1,country);
+        ArgumentCaptor<Country> countryArgumentCaptor = ArgumentCaptor.forClass(Country.class);
+        verify(countryRepository).save(countryArgumentCaptor.capture());
+        Country capturedCountry = countryArgumentCaptor.getValue();
+        assertThat(capturedCountry).isEqualTo(country);
+    }
+
+    @Test
+    void throwExceptionUpdateCountryIsNull(){
+        assertThatThrownBy(()-> locationService.updateCountry(1,null))
+                .hasMessageContaining("PLease insert valid country info");
     }
 
     @Test
     void updateProvince() {
+        Province province = new Province("Test",1);
+        province.setId(1L);
+        given(countryRepository.existsById(1)).willReturn(true);
+        given(provinceRepository.existsById(1L)).willReturn(true);
+        locationService.updateProvince(1L,province);
+        ArgumentCaptor<Province> provinceArgumentCaptor = ArgumentCaptor.forClass(Province.class);
+        verify(provinceRepository).save(provinceArgumentCaptor.capture());
+        Province capturedProvince = provinceArgumentCaptor.getValue();
+        assertThat(capturedProvince).isEqualTo(province);
     }
 
     @Test
