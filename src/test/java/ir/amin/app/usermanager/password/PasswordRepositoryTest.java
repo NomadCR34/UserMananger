@@ -26,8 +26,6 @@ class PasswordRepositoryTest {
     void findPasswordByUserId() {
         Password password = new Password(
                 "123",
-                System.currentTimeMillis(),
-                true,
                 1L
         );
         passwordRepository.save(password);
@@ -39,8 +37,6 @@ class PasswordRepositoryTest {
     void isPasswordExistForUser() {
         Password password = new Password(
                 "123",
-                System.currentTimeMillis(),
-                true,
                 1L
         );
         passwordRepository.save(password);
@@ -51,8 +47,6 @@ class PasswordRepositoryTest {
     void isPasswordNotExistForUser() {
         Password password = new Password(
                 "123",
-                System.currentTimeMillis(),
-                true,
                 1L
         );
         passwordRepository.save(password);
@@ -63,8 +57,6 @@ class PasswordRepositoryTest {
     void isPasswordExistAndValidForUser() {
         Password password = new Password(
                 "123",
-                System.currentTimeMillis(),
-                true,
                 1L
         );
         passwordRepository.save(password);
@@ -76,8 +68,6 @@ class PasswordRepositoryTest {
     void isPasswordExistAndNotValidForUser() {
         Password password = new Password(
                 "123",
-                System.currentTimeMillis(),
-                false,
                 1L
         );
         passwordRepository.save(password);

@@ -1,9 +1,6 @@
 package ir.amin.app.usermanager.password;
 
 
-
-
-
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
@@ -14,30 +11,30 @@ import javax.persistence.*;
 public class Password {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "PASSWORD_DATA")
-    @SequenceGenerator(name = "PASSWORD_DATA",sequenceName = "PASSWORD_DATA",allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PASSWORD_DATA")
+    @SequenceGenerator(name = "PASSWORD_DATA", sequenceName = "PASSWORD_DATA", allocationSize = 1)
     private Long id;
 
-    @Column(length = 64,nullable = false)
+    @Column(name = "password", length = 64, nullable = false)
     @NonNull
     private String password;
 
     @NonNull
-    @Column(nullable = false)
+    @Column(name = "createDate", nullable = false)
     private Long createDate;
 
     @NonNull
-    @Column(nullable = false)
+    @Column(name = "isValid", nullable = false)
     private Boolean isValid;
 
     @NonNull
-    @Column(nullable = false)
+    @Column(name = "userId", nullable = false)
     private Long userId;
 
     public Password() {
     }
 
-    public Password(String password, Long createDate, Boolean isValid, Long userId) {
+    public Password(String password, Long userId) {
         this.password = password;
         this.createDate = createDate;
         this.isValid = isValid;

@@ -58,7 +58,7 @@ public class UserService {
     }
 
     public User updateUser(Long userID, User user) {
-        if (!userRepository.existsById(userID)) {
+        if (!isUserExistById(userID)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User with id = " + userID + " not found.");
         }
         invalidateUser(user);
@@ -72,7 +72,7 @@ public class UserService {
     }
 
     public ResponseEntity<?> deleteUser(Long userID) {
-        if (!userRepository.existsById(userID)) {
+        if (!isUserExistById(userID)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User with id = " + userID + " not found.");
         }
         try {
@@ -81,6 +81,10 @@ public class UserService {
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not delete user");
         }
+    }
+
+    public Boolean isUserExistById(Long userID){
+        return userRepository.existsById(userID);
     }
 
     private void invalidateUser(User user) {
